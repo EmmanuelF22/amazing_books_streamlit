@@ -24,7 +24,7 @@ st.title("How was your book?")
 
 
 # a) Three option buttons
-model = st.radio("Choose an algorithm:", ["Naive Bayes", "LSTM"])
+model = st.radio("Choose an algorithm:", ["Naive Bayes", "LSTM", "Conv1D"])
 
 # b) Enter text
 comment = st.text_input("Enter a comment:")
@@ -61,6 +61,10 @@ if st.button("Generate prediction"):
             # Use columns to display image and header on the same line
             col1, col2 = st.columns([1, 3])
             col1.image(good_url, width=200)  # Adjusted width for smaller image
+            col1.markdown(
+                f'<div style="text-align: right; width: 200px;"><img src="{good_url}" width="200"></div>',
+                unsafe_allow_html=True
+            )
             col2.header('')
             col2.header('')
             col2.header('That was a good book, right?')
@@ -70,4 +74,4 @@ if st.button("Generate prediction"):
             col1.image(bad_url, width=200)  # Adjusted width for smaller image
             col2.header('')
             col2.header('')
-            col2.header("Look like you didn't like it...")
+            col2.header("You didn't like it? Me neither...")

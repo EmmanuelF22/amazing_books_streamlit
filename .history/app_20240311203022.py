@@ -6,10 +6,7 @@ st.set_page_config(
             page_title="Amazing books", # => Quick reference - Streamlit
             page_icon="📚",   #📓📖📘
             layout="wide", # centered
-            # backgroundColor="#3498db",  # Adjusted background color to blue
             initial_sidebar_state="auto") # collapsed
-
-
 
 
 # build a left ribbon
@@ -24,24 +21,24 @@ st.title("How was your book?")
 
 
 # a) Three option buttons
-model = st.radio("Choose an algorithm:", ["Naive Bayes", "LSTM"])
+model = st.radio("Choose an algorithm:", ["Naive Bayes", "LSTM", "Conv1D"])
 
 # b) Enter text
-comment = st.text_input("Enter a comment:")
+user_text = st.text_input("Enter a comment:")
 
 # Button to trigger the action
 if st.button("Generate prediction"):
-
-
 
     params=dict(
     modele=model,
     comment=comment
     )
 
+
     ################################# CALL THE API ######################################
 
     url = 'https://amazing-ympfzdipeq-ew.a.run.app/predict'
+
 
     response = requests.get(url, params=params)
 
@@ -53,21 +50,10 @@ if st.button("Generate prediction"):
     good_url='https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Thumb_up_icon.svg/1200px-Thumb_up_icon.svg.png'
 
 
-    st.title("")
-    st.title("")
-
     if comment != "":
         if pred == 1:
-            # Use columns to display image and header on the same line
-            col1, col2 = st.columns([1, 3])
-            col1.image(good_url, width=200)  # Adjusted width for smaller image
-            col2.header('')
-            col2.header('')
-            col2.header('That was a good book, right?')
+            st.image(good_url, use_column_width=True)    #add caption=positive
+            st.header('That was a good book, right?')
         else:
-            # Use columns to display image and header on the same line
-            col1, col2 = st.columns([1, 3])
-            col1.image(bad_url, width=200)  # Adjusted width for smaller image
-            col2.header('')
-            col2.header('')
-            col2.header("Look like you didn't like it...")
+            st.image(bad_url, use_column_width=True)
+            st.header("You didn't like it? Me neither...")

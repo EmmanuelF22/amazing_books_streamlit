@@ -24,7 +24,7 @@ st.title("How was your book?")
 
 
 # a) Three option buttons
-model = st.radio("Choose an algorithm:", ["Naive Bayes", "LSTM"])
+model = st.radio("Choose an algorithm:", ["Naive Bayes", "LSTM", "Conv1D"])
 
 # b) Enter text
 comment = st.text_input("Enter a comment:")

@@ -10,7 +10,15 @@ st.set_page_config(
             initial_sidebar_state="auto") # collapsed
 
 
-
+CSS = """
+h1 {
+    color: red;
+}
+.stApp {
+    # background-image: url(https://avatars1.githubusercontent.com/u/9978111?v=4);
+    background-size: cover;
+}
+"""
 
 # build a left ribbon
 image_url = requests.get("https://m.media-amazon.com/images/I/71q3D33qowL.jpg").url
@@ -24,15 +32,14 @@ st.title("How was your book?")
 
 
 # a) Three option buttons
-model = st.radio("Choose an algorithm:", ["Naive Bayes", "LSTM"])
+model = st.radio(f'<style>{CSS}</style>', ["Naive Bayes", "LSTM", "Conv1D"])
+# st.write(f'<style>{CSS}</style>', unsafe_allow_html=True)
 
 # b) Enter text
 comment = st.text_input("Enter a comment:")
 
 # Button to trigger the action
 if st.button("Generate prediction"):
-
-
 
     params=dict(
     modele=model,
@@ -60,14 +67,10 @@ if st.button("Generate prediction"):
         if pred == 1:
             # Use columns to display image and header on the same line
             col1, col2 = st.columns([1, 3])
-            col1.image(good_url, width=200)  # Adjusted width for smaller image
-            col2.header('')
-            col2.header('')
+            col1.image(good_url, width=100)  # Adjusted width for smaller image
             col2.header('That was a good book, right?')
         else:
             # Use columns to display image and header on the same line
             col1, col2 = st.columns([1, 3])
-            col1.image(bad_url, width=200)  # Adjusted width for smaller image
-            col2.header('')
-            col2.header('')
-            col2.header("Look like you didn't like it...")
+            col1.image(bad_url, width=100)  # Adjusted width for smaller image
+            col2.header("You didn't like it? Me neither...")
