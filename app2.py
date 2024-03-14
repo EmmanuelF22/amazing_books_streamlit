@@ -10,6 +10,24 @@ st.set_page_config(
     initial_sidebar_state="auto"
 )
 
+
+# Add custom CSS to force dark mode
+def set_custom_theme():
+    st.markdown(
+        """
+        <style>
+        body {
+            color: white;
+            background-color: #1E1E1E; /* Dark background color */
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+set_custom_theme()
+
+
 # Fonction pour obtenir l'image en base64
 def get_image_base64(image_path):
     with open(image_path, "rb") as img_file:
@@ -129,7 +147,7 @@ with col2:
                 response_message = "👍 It was a good book, wasn't it ?"
                 background_color = "#C1FFC1"  # Vert pâle
             elif pred==0:
-                response_message = "👉 Not so sure about it?"
+                response_message = "👉 It sounds like you do not really want to give opinion, do you?"
                 background_color = "#FFFF99"  # Jaune pâle
             elif pred==-1:
                 response_message = "👎 Looks like you didn't like it..."
