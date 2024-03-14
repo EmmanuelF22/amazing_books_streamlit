@@ -56,7 +56,7 @@ with col2:
 )
 
 # Widget radio avec une taille de police plus grande
-    model = st.radio("Choose an algorithm:", ["Naive Bayes", "LSTM"])
+    model = st.radio("Choose an algorithm:", ["Naive Bayes", "Conv1D", "LSTM"])
 # Exemple d'utilisation du modèle sélectionné
 
     if model == "Naive Bayes":
@@ -93,9 +93,7 @@ with col2:
 )
 
 # Affichage du bouton personnalisé
-    st.title(model)
-    st.title(model_clean)
-    st.title(comment)
+ 
 
     if st.button("Générer une prédiction"):
         params = {
@@ -123,24 +121,22 @@ with col2:
             st.title("")
 
             # Style pour le cadre de réponse avec du texte noir et fond beige
-        if model_clean=="naive":
-            response_message = "👍 It was a good book, wasn't it ?" if pred == 1 else "👎 Looks like you didn't like it..."
+        if model=="Conv1D":
+            response_message = "👉 Not so sure about it?"
+            background_color = "#FFFF99"  # Jaune pâle
         elif model_clean=='lstm':
             if pred == 1:
                 response_message = "👍 It was a good book, wasn't it ?"
+                background_color = "#C1FFC1"  # Vert pâle
             elif pred==0:
                 response_message = "👉 Not so sure about it?"
+                background_color = "#FFFF99"  # Jaune pâle
             elif pred==-1:
                 response_message = "👎 Looks like you didn't like it..."
+                background_color = "#FFC0CB"  # Rouge pâle
 
 
-        # Appliquer le style de fond en fonction de la valeur de pred
-        if pred == 1:
-            background_color = "#C1FFC1"  # Vert pâle
-        elif pred==0:
-            background_color = "#FFFF99"  # Jaune pâle
-        else:
-            background_color = "#FFC0CB"  # Rouge pâle
+
 
         # Appliquer le style dynamique
         response_style = f"""
