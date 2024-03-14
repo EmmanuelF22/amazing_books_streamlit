@@ -64,6 +64,7 @@ with col2:
     else:
         model_clean="lstm"
 
+    st.title
 
     # Entrée de texte
     comment = st.text_input("")
