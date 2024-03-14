@@ -31,70 +31,120 @@ def set_background(image_path):
 
 # Appliquer l'image de fond
 # Remplacez par le chemin réel de votre image de fond
-set_background("/Users/victorconte/Downloads/biblio.jpg")
+set_background("data/biblio.jpg")
 
 # Conteneur pour le fond blanc
-st.markdown("""
-<style>
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400&display=swap');
 
-.garamond {{
-    font-family: 'EB Garamond', serif;
-}}
-</style>
-""", unsafe_allow_html=True)
+col1,col2,col3= st.columns(3)
 
-# Utilisation de la classe garamond pour les éléments spécifiques
-with st.container():
-    st.markdown('<p class="garamond">Comment était votre livre ?</p>', unsafe_allow_html=True)
-    model = st.radio("Choisissez un algorithme :", ["Naive Bayes", "LSTM"], key="model")
+with col2:
+    st.markdown('<h1 style="color: white;">How was your book?</h1>', unsafe_allow_html=True)
 
-comment = st.text_input("Entrez un commentaire :", key="comment")
+        # Choix du modèle
 
-if st.button("Générer une prédiction"):
-    params = {
-        'modele': model,
-        'comment': comment
+
+    # Widget radio avec des éléments colorés
+    st.markdown(
+    """
+    <style>
+        .st-eb .st-d7 .st-da {
+            font-size: px; /* Changer la taille de la police */
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# Widget radio avec une taille de police plus grande
+    model = st.radio("Choose an algorithm:", ["Naive Bayes", "LSTM"])
+# Exemple d'utilisation du modèle sélectionné
+
+
+
+
+# Affichage du bouton radio personnalisé
+    #model = st.radio("Choisissez un algorithme :", ["Naive Bayes", "LSTM"])
+
+    # Entrée de texte
+    comment = st.text_input("")
+
+    response_placeholder = st.empty()
+    # Affichage de la prédiction
+    # Bouton pour déclencher l'action
+    st.markdown(
+    """
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400&display=swap');
+    .stButton button {
+        color: #040c19; /* Couleur de la typographie */
+        background-color: #fdefc2; /* Couleur du bouton */
+        font-family: 'EB Garamond', serif; /* Typographie du bouton */
+        font-size: 16px; /* Taille de la typographie */
+        padding: 8px 16px; /* Espacement du texte à l'intérieur du bouton */
+        border-radius: 5px; /* Bordure arrondie du bouton */
+        border: none; /* Supprime la bordure du bouton */
+    }
+    .stButton button:hover {
+        background-color: #040c19; /* Couleur du bouton au survol */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# Affichage du bouton personnalisé
+    if st.button("Générer une prédiction"):
+        params = {
+            'modele': model,
+            'comment': comment
     }
 
 
 
     ################################# CALL THE API ######################################
 
-    url = 'https://amazing-ympfzdipeq-ew.a.run.app/predict'
+        col1,col2,col3 =st.columns(3)
+        with col2:
+            url = 'https://amazing2-ympfzdipeq-ew.a.run.app/predict'
 
-    response = requests.get(url, params=params)
+            response = requests.get(url, params=params)
 
-    prediction = response.json()
+            prediction = response.json()
 
-    pred = prediction['prediction']
+            pred = prediction['prediction']
 
 
-    st.title("")
-    st.title("")
+            st.title("")
+            st.title("")
 
-    # Style pour le cadre de réponse avec du texte noir et fond beige
-    response_style = f"""
-<style>
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400&display=swap');
+            # Style pour le cadre de réponse avec du texte noir et fond beige
+        response_message = "👍 It was a good book, wasn't it ?" if pred == 1 else "👎 Looks like you didn't like it..."
 
-.response-container {{
-    font-family: 'EB Garamond', serif;
-    border-radius: 5px;
-    padding: 1rem;
-    margin: 1rem 0;
-    background-color: #fdefc2;  /* Couleur beige */
-    color: #040c19;             /* Couleur du texte */
-    font-size: 1.25rem;         /* Taille de la police */
-}}
-</style>
-"""
+        # Appliquer le style de fond en fonction de la valeur de pred
+        if pred == 1:
+            background_color = "#C1FFC1"  # Vert pâle
+        else:
+            background_color = "#FFC0CB"  # Rouge pâle
 
-    # Appliquer le style
-    st.markdown(response_style, unsafe_allow_html=True)
+        # Appliquer le style dynamique
+        response_style = f"""
+        <style>
+        @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400&display=swap');
 
-    # Déterminez le message de la réponse
-    response_message = "👍 It was a good book, wasn't it ?" if pred == 1 else "👎 👎 Looks like you didn't like it..."
+        .response-container {{
+        font-family: 'EB Garamond', serif;
+        border-radius: 5px;
+        padding: 1rem;
+        margin: 1rem 0;
+        color: #040c19;             /* Couleur du texte */
+        font-size: 1.25rem;         /* Taille de la police */
+        background-color: {background_color};  /* Couleur de fond dynamique */
+        }}
+        </style>
+        """
 
-    # Encapsuler le message dans un div pour appliquer le style
-    st.markdown(f'<div class="response-container">{response_message}</div>', unsafe_allow_html=True)
+        # Appliquer le style
+        st.markdown(response_style, unsafe_allow_html=True)
+
+        # Afficher la réponse
+        st.markdown(f'<div class="response-container">{response_message}</div>', unsafe_allow_html=True)
