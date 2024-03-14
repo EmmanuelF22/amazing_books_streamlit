@@ -93,9 +93,6 @@ with col2:
 )
 
 # Affichage du bouton personnalisé
-    st.title(model)
-    st.title(model_clean)
-    st.title(comment)
 
     if st.button("Générer une prédiction"):
         params = {
