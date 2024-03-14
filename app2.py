@@ -57,7 +57,7 @@ with col2:
 
 # Widget radio avec une taille de police plus grande
     model = st.radio("Choose an algorithm:", ["Naive Bayes", "Conv1D", "LSTM"])
-# Exemple d'utilisation du modèle sélectionné
+# Exemple d'utilisation du modèle sélectionné. Conv will be neutral
 
     if model == "Naive Bayes":
         model_clean="naive"
@@ -137,6 +137,7 @@ with col2:
             elif pred==-1:
                 response_message = "👎 Looks like you didn't like it..."
                 background_color = "#FFC0CB"  # Rouge pâle
+
 
 
 
