@@ -64,7 +64,6 @@ with col2:
     else:
         model_clean="lstm"
 
-    st.title
 
     # Entrée de texte
     comment = st.text_input("")
@@ -94,8 +93,9 @@ with col2:
 )
 
 # Affichage du bouton personnalisé
-    # st.title(model)
-    # st.title(comment)
+    st.title(model)
+    st.title(model_clean)
+    st.title(comment)
 
     if st.button("Générer une prédiction"):
         params = {
