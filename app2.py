@@ -66,7 +66,9 @@ with col2:
 
 
     # Entrée de texte
-    comment = st.text_input("")
+    # comment = st.text_input("", height=200)
+    comment = st.text_area("What did you think of the book?", height=50)
+
 
     response_placeholder = st.empty()
     # Affichage de la prédiction
@@ -93,7 +95,7 @@ with col2:
 )
 
 # Affichage du bouton personnalisé
- 
+
 
     if st.button("Générer une prédiction"):
         params = {
@@ -117,14 +119,12 @@ with col2:
             pred = prediction['prediction']
 
 
-            st.title("")
-            st.title("")
 
             # Style pour le cadre de réponse avec du texte noir et fond beige
         if model=="Conv1D":
             response_message = "👉 Not so sure about it?"
             background_color = "#FFFF99"  # Jaune pâle
-        elif model_clean=='lstm':
+        else:
             if pred == 1:
                 response_message = "👍 It was a good book, wasn't it ?"
                 background_color = "#C1FFC1"  # Vert pâle
