@@ -140,14 +140,14 @@ with col2:
 
             # Style pour le cadre de réponse avec du texte noir et fond beige
         if model=="Conv1D":
-            response_message = "👉 Not so sure about it?"
+            response_message = "👉 It sounds like you do not really want to give your opinion..."
             background_color = "#FFFF99"  # Jaune pâle
         else:
             if pred == 1:
                 response_message = "👍 It was a good book, wasn't it ?"
                 background_color = "#C1FFC1"  # Vert pâle
             elif pred==0:
-                response_message = "👉 It sounds like you do not really want to give opinion, do you?"
+                response_message = "👉 It sounds like you do not really want to give your opinion..."
                 background_color = "#FFFF99"  # Jaune pâle
             elif pred==-1:
                 response_message = "👎 Looks like you didn't like it..."
