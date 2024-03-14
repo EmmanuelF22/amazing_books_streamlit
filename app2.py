@@ -120,15 +120,15 @@ with col2:
             st.title("")
 
             # Style pour le cadre de réponse avec du texte noir et fond beige
-        if model_clean=="naive":
-            response_message = "👍 It was a good book, wasn't it ?" if pred == 1 else "👎 Looks like you didn't like it..."
-        elif model_clean=='lstm':
-            if pred == 1:
-                response_message = "👍 It was a good book, wasn't it ?"
-            elif pred==0:
-                response_message = "👉 Not so sure about it?"
-            elif pred==-1:
-                response_message = "👎 Looks like you didn't like it..."
+        # if model_clean=="naive":
+        #     response_message = "👍 It was a good book, wasn't it ?" if pred == 1 else "👎 Looks like you didn't like it..."
+        # elif model_clean=='lstm':
+        if pred == 1:
+            response_message = "👍 It was a good book, wasn't it ?"
+        elif pred==0:
+            response_message = "👉 Not so sure about it?"
+        elif pred==-1:
+            response_message = "👎 Looks like you didn't like it..."
 
 
         # Appliquer le style de fond en fonction de la valeur de pred
