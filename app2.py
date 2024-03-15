@@ -10,6 +10,24 @@ st.set_page_config(
     initial_sidebar_state="auto"
 )
 
+
+# Add custom CSS to force dark mode
+def set_custom_theme():
+    st.markdown(
+        """
+        <style>
+        body {
+            color: white;
+            background-color: #1E1E1E; /* Dark background color */
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+set_custom_theme()
+
+
 # Fonction pour obtenir l'image en base64
 def get_image_base64(image_path):
     with open(image_path, "rb") as img_file:
@@ -57,7 +75,7 @@ with col2:
 
 # Widget radio avec une taille de police plus grande
     model = st.radio("Choose an algorithm:", ["Naive Bayes", "Conv1D", "LSTM"])
-# Exemple d'utilisation du modèle sélectionné. Conv will be neutral
+# Exemple d'utilisation du modèle sélectionné
 
     if model == "Naive Bayes":
         model_clean="naive"
@@ -66,7 +84,9 @@ with col2:
 
 
     # Entrée de texte
-    comment = st.text_input("")
+    # comment = st.text_input("", height=200)
+    comment = st.text_area("What did you think of the book?", height=50)
+
 
     response_placeholder = st.empty()
     # Affichage de la prédiction
@@ -94,6 +114,7 @@ with col2:
 
 # Affichage du bouton personnalisé
 
+
     if st.button("Générer une prédiction"):
         params = {
             'modele': model_clean,
@@ -116,23 +137,17 @@ with col2:
             pred = prediction['prediction']
 
 
-            st.title("")
-            st.title("")
 
             # Style pour le cadre de réponse avec du texte noir et fond beige
-        # if model_clean=="naive":
-        #     response_message = "👍 It was a good book, wasn't it ?" if pred == 1 else "👎 Looks like you didn't like it..."
-        # elif model_clean=='lstm':
-
-        if model == "Conv1D":
-            response_message = "👉 Not so sure about it?"
+        if model=="Conv1D":
+            response_message = "👉 It sounds like you do not really want to give your opinion..."
             background_color = "#FFFF99"  # Jaune pâle
         else:
             if pred == 1:
                 response_message = "👍 It was a good book, wasn't it ?"
                 background_color = "#C1FFC1"  # Vert pâle
             elif pred==0:
-                response_message = "👉 Not so sure about it?"
+                response_message = "👉 It sounds like you do not really want to give your opinion..."
                 background_color = "#FFFF99"  # Jaune pâle
             elif pred==-1:
                 response_message = "👎 Looks like you didn't like it..."
