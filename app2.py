@@ -70,7 +70,8 @@ with col2:
     # comment = st.text_input("")
     comment = st.selectbox(
     '',
-    ('With its elegant writing style and gripping plot, this book is a true work of literary art that lingers in the mind long after you turn the last page',
+    (' ',
+     'With its elegant writing style and gripping plot, this book is a true work of literary art that lingers in the mind long after you turn the last page',
      'The book lacked depth and failed to engage me, leaving me feeling disappointed and unfulfilled',
      'Despite some initial reservations, the story really picked up momentum and ended on a high note.',
      'It starts off at a leisurely pace, but give it time – the story gathers momentum, leading to a satisfying and strong finish that makes the journey worthwhile.',
