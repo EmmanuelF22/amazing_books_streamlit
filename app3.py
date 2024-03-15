@@ -69,7 +69,7 @@ with col2:
     # Entrée de texte
     # comment = st.text_input("")
     comment = st.selectbox(
-    'How would you like to be contacted?',
+    '',
     ('With its elegant writing style and gripping plot, this book is a true work of literary art that lingers in the mind long after you turn the last page',
      'The book lacked depth and failed to engage me, leaving me feeling disappointed and unfulfilled',
      'Despite some initial reservations, the story really picked up momentum and ended on a high note.',
@@ -77,7 +77,8 @@ with col2:
      '"The Lost Novel" disappoints with shallow characters and aimless plot. Its forced writing style fails to engage, leaving a forgettable impression.'
      ))
 
-    st.write('You selected:', comment)
+    # st.write('', comment)
+    st.text_area("What did you think of the book?", comment, height=50)
 
     response_placeholder = st.empty()
     # Affichage de la prédiction
@@ -127,8 +128,8 @@ with col2:
             pred = prediction['prediction']
 
 
-            st.title("")
-            st.title("")
+            # st.title("")
+            # st.title("")
 
             # Style pour le cadre de réponse avec du texte noir et fond beige
         # if model_clean=="naive":
